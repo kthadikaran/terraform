@@ -6,6 +6,7 @@ terraform {
       version = "=2.46.0"
     }
   }
+
   backend "azurerm" {
     resource_group_name  = "terraform-aks-k8s-rg01"
     storage_account_name = "terraformaksk8ssa01"
@@ -87,35 +88,6 @@ resource "azurerm_subnet" "terraformak8s-subnet01" {
   address_prefixes     = ["10.1.1.0/20"]
 }
 
-#IP Address range for firewall subnet
-resource "azurerm_subnet" "terraformak8s-firewall-subnet01" {
-  name                 = "terraformaksk8sfwsubnet01"
-  virtual_network_name = azurerm_virtual_network.terraformak8s-vnet.name
-  resource_group_name  = azurerm_resource_group.terraformak8s-rg02.name
-  address_prefixes     = ["10.1.60.0/20"]
-}
-
-#Public IP Address for firewall
-resource "azurerm_public_ip" "terraformak8s-firewall-pip01" {
-  name                 = "terraformak8sfirewallpip01"
-  virtual_network_name = azurerm_virtual_network.terraformak8s-vnet.name
-  resource_group_name  = azurerm_resource_group.terraformak8s-rg02.name
-  allocation_method    = "Static"
-  sku                  = "Standard"
-}
-resource "azurerm_firewall" "base" {
-  name                 = "fw-${local.name_prefix}-${local.environment}-${local.region}"
-  virtual_network_name = azurerm_virtual_network.terraformak8s-vnet.name
-  resource_group_name  = azurerm_resource_group.terraformak8s-rg02.name
-
-  ip_configuration {
-    name                 = "ip-${local.name_prefix}-${local.environment}-${local.region}"
-    subnet_id            = azurerm_subnet.firewall.id
-    public_ip_address_id = azurerm_public_ip.terraformak8s-firewall-pip01.id
-  }
-}
-
-
 #User defined routable for terraform azure k8s cluster
 resource "azurerm_route_table" "terraformak8s-rtb01" {
   name                = "terraformaksk8srtb01"
@@ -146,6 +118,10 @@ data "azurerm_key_vault_secret" "example" {
   key_vault_id = "/subscriptions/6a775481-949a-498b-ae84-a2265a6dd1f4/resourceGroups/terraform-aks-k8s-rg01/providers/Microsoft.KeyVault/vaults/terraformaksclslnxnkv01"
 }
 
+data "azuread_groups" "terraform-ak8s-adgrp-01" {
+  display_names = ["azadmonspngrp01"]
+}
+
 #Below Terraform block of code create managed azure Kubernetes cluster.
 resource "azurerm_kubernetes_cluster" "terraformak8s-cluster01" {
   name                = "terraformak8scls01"
@@ -171,7 +147,7 @@ resource "azurerm_kubernetes_cluster" "terraformak8s-cluster01" {
       "app"           = "system-apps"
     }
     vnet_subnet_id = azurerm_subnet.terraformak8s-subnet01.id
-
+  }
     #Kubernetes cluster authentication and authorization method.
     #Authentication and authorization are used by the Kubernetes cluster to control user access to the cluster as well as what the user may do once authenticated.
     identity {
@@ -179,10 +155,10 @@ resource "azurerm_kubernetes_cluster" "terraformak8s-cluster01" {
     }
     role_based_access_control {
       enabled = true
-      # azure_active_directory {
-      #   managed                = true
-      #   admin_group_object_ids = [azuread_group.aks_administrators.id]
-      # }
+      azure_active_directory {
+        managed                = true
+        admin_group_object_ids = [data.azuread_groups.terraform-ak8s-adgrp-01.id]
+      }
     }
     linux_profile {
       admin_username = "ubuntu"
@@ -206,4 +182,3 @@ resource "azurerm_kubernetes_cluster" "terraformak8s-cluster01" {
       owner       = "demo@local.com"
     }
   }
-}
