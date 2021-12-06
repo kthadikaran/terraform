@@ -19,7 +19,6 @@ terraform {
 provider "azurerm" {
   features {}
 }
-
 # Your Terraform code for resource deployment starts from here. 
 #Create a resource group in Azure subscription
 resource "azurerm_resource_group" "terraformak8s-rg02" {
@@ -85,7 +84,7 @@ resource "azurerm_subnet" "terraformak8s-subnet01" {
   name                 = "terraformaksk8ssubnet01"
   virtual_network_name = azurerm_virtual_network.terraformak8s-vnet.name
   resource_group_name  = azurerm_resource_group.terraformak8s-rg02.name
-  address_prefixes     = ["10.1.1.0/20"]
+  address_prefixes     = ["10.1.0.0/16"]
 }
 
 #User defined routable for terraform azure k8s cluster
@@ -118,8 +117,8 @@ data "azurerm_key_vault_secret" "example" {
   key_vault_id = "/subscriptions/6a775481-949a-498b-ae84-a2265a6dd1f4/resourceGroups/terraform-aks-k8s-rg01/providers/Microsoft.KeyVault/vaults/terraformaksclslnxnkv01"
 }
 
-data "azuread_groups" "terraform-ak8s-adgrp-01" {
-  display_names = ["azadmonspngrp01"]
+data "azuread_group" "terraform-ak8s-adgrp-01" {
+  display_name = "azadmonspngrp01"
 }
 
 #Below Terraform block of code create managed azure Kubernetes cluster.
@@ -156,8 +155,8 @@ resource "azurerm_kubernetes_cluster" "terraformak8s-cluster01" {
     role_based_access_control {
       enabled = true
       azure_active_directory {
-        managed                = true
-        admin_group_object_ids = [data.azuread_groups.terraform-ak8s-adgrp-01.id]
+        managed = true
+        admin_group_object_ids = [data.azuread_group.terraform-ak8s-adgrp-01.id]
       }
     }
     linux_profile {
