@@ -133,7 +133,7 @@ resource "azurerm_kubernetes_cluster" "terraformak8s-cluster01" {
   #The default node pool is the first node pool in the cluster one that is being created at the time of creating the cluster you must need this otherwise Azure won’t allow you to create AKS. 
   default_node_pool {
     name                = "lnznpool"
-    availability_zones  = [1, 2]
+    availability_zones  = [1, 2,3]
     enable_auto_scaling = true
     min_count           = 1
     max_count           = 2 #Recommended count for production environment
@@ -148,11 +148,13 @@ resource "azurerm_kubernetes_cluster" "terraformak8s-cluster01" {
     }
     vnet_subnet_id = azurerm_subnet.terraformak8s-subnet01.id
   }
-    #Kubernetes cluster authentication and authorization method.
+    ##==================Kubernetes cluster authentication and authorization method================================#
     #Authentication and authorization are used by the Kubernetes cluster to control user access to the cluster as well as what the user may do once authenticated.
     identity {
       type = "SystemAssigned"
     }
+    
+    #Role based access to Azure Aubernetes Service
     role_based_access_control {
       enabled = true
       azure_active_directory {
@@ -160,6 +162,7 @@ resource "azurerm_kubernetes_cluster" "terraformak8s-cluster01" {
         admin_group_object_ids = [data.azuread_group.terraform-ak8s-adgrp-01.id]
       }
     }
+    #SSH key pair access for AKS Nodes
     linux_profile {
       admin_username = "ubuntu"
       ssh_key {
