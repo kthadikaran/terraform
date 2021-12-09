@@ -128,15 +128,15 @@ resource "azurerm_kubernetes_cluster" "terraformak8s-cluster01" {
   location            = azurerm_resource_group.terraformak8s-rg02.location
   kubernetes_version  = "1.20.9"
   dns_prefix          = "terraformak8scls01"
-  node_resource_group = "${azurerm_resource_group.terraformak8s-rg02.name}-aks"
+  node_resource_group = "${azurerm_resource_group.terraformak8s-rg02.name}-aks-noderg"
 
   #The default node pool is the first node pool in the cluster one that is being created at the time of creating the cluster you must need this otherwise Azure won’t allow you to create AKS. 
   default_node_pool {
     name                = "lnznpool"
-    availability_zones  = [1, 2, 3]
+    availability_zones  = [1, 2]
     enable_auto_scaling = true
     min_count           = 1
-    max_count           = 3 #Recommended count for production environment
+    max_count           = 2 #Recommended count for production environment
     vm_size             = "Standard_D2_v2"
     os_disk_size_gb     = 30
     type                = "VirtualMachineScaleSets"
