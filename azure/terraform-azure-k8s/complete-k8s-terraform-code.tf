@@ -24,10 +24,12 @@ provider "azurerm" {
 resource "azurerm_resource_group" "terraformak8s-rg02" {
   name     = "terraform-aks-k8s-rg02"
   location = "westeurope"
-  tags = {
-    name        = "terraform-aks-k8s-rg02"
-    environment = "development"
-    owner       = "demo@local.com"
+ tags = {
+    Name            = "terraform-aks-k8s-rg02"
+    Project         = "livonlinl"
+    Environment     = "Development"
+    ResourceOwner   = "demo@local.com"
+    CostCenter      = "DevOps"
   }
 }
 
@@ -55,9 +57,11 @@ resource "azurerm_network_security_group" "terraformak8s-nsg01" {
     destination_address_prefix = "*"
   }
   tags = {
-    name        = "tarraformaksk8snsg01"
-    environment = "development"
-    owner       = "demo@local.com"
+    Name            = "terraform-aks-k8s-rg02"
+    Project         = "livonlinl"
+    Environment     = "Development"
+    ResourceOwner   = "demo@local.com"
+    CostCenter      = "DevOps"
   }
 }
 
@@ -73,9 +77,11 @@ resource "azurerm_virtual_network" "terraformak8s-vnet" {
     enable = true
   }
   tags = {
-    name        = "terraformaksk8svnet01"
-    environment = "development"
-    owner       = "demo@local.com"
+    Name            = "terraform-aks-k8s-rg02"
+    Project         = "liveonlin"
+    Environment     = "Development"
+    ResourceOwner   = "demo@local.com"
+    CostCenter       = "DevOps"
   }
 }
 
@@ -180,8 +186,10 @@ resource "azurerm_kubernetes_cluster" "terraformak8s-cluster01" {
     }
     #Kubernetes cluster nodes administrator access
     tags = {
-      name        = "terraformaksk8scls01"
-      environment = "development"
-      owner       = "demo@local.com"
-    }
+    Name            = "terraform-aks-k8s-rg02"
+    Project         = "livonlinl"
+    Environment     = "Development"
+    ResourceOwner   = "demo@local.com"
+    CostCenter      = "DevOps"
+  }
   }
