@@ -1,0 +1,62 @@
+Why DevOps?
+
+Sazeed - DevOps helps to realize software engineering practices with efficiency and in a lean manner. Increasingly, the success of any process or program in an organization depends on the extent of automation and degree of digitalization. Also, any digital transformation typically requires advances in technology combined with a paradigm shift in culture. In a way, DevOps can be viewed as leveraging the transformative power of digitalization for software development. DevOps encourages automation of processes and trusting the pipelines. Repetitive manual tasks are automated creating benefits including reduced errors and increased speed.
+
+
+
+Adding on to what Sazeed mentioned, DevOps gives teams a competitive edge by becoming faster. It seamlessly ensures smooth baton transfer between various stages in a software lifecycle. Interestingly, DevOps enables working in a hybrid way – which is very evident during the pandemic.
+
+
+
+What does a DevOps engineer do?
+
+A DevOps engineer focuses on engineering practices for efficient product development and delivery model and then keeps on improvising them. To do this, a DevOps engineer must understand the people, product, process, and technology that creates the ecosystem. The DevOps engineer introduces tools and necessary pipelines throughout the product development life cycle for effective release of products, which conform to regulations and processes, in alignment with this ecosystem. To be more specific, I ensure that the built pipelines are robust with high availability and integrity, automate wherever there is a possibility, firefights with infrastructural issues, keep connected with the team. Amidst all this, continue to focus on my self-development to help me and my organization grow better & together.
+
+
+How do DevOps engineers add value?
+
+
+A primary value of DevOps is bringing in synergy through collaboration. DevOps is focused on bridging the gap between different teams and creating an environment where all teams work in unison together with focus on product delivery, resolving dependencies between them.
+
+The primary goal of DevOps engineers is to optimize the flow of value from idea to end user.
+
+
+It enables the capability to continuously develop and release software with high confidence and accuracy. While DevOps advocates a zero-defect policy, it also promotes a fail-fast and learn faster culture through specialized pipelines.
+
+We strive to shorten the time to market, apply incremental improvements in response to the changing environment, and create a more streamlined development process.
+
+
+
+How do the teams in DC using DevOps collaborate and learn from each other?
+
+
+
+Sazeed -The various DevOps teams in DC use knowledge sharing platforms like xBL Integration COP, DevOps COP, and One.Via forum to share both successes and failures and learn from each other. We try to adopt the best practices shared in these forums within our respective teams.
+
+
+
+How do you collect and manage the sensitive data required for data-driven software engineering decisions?
+
+
+
+We use modern analytics tools with interactive dashboards in the pipelines to make data-driven software engineering decisions. These include both proprietary tools such as SONAR, NCOVER, Code Central, Klokwork, etc., and home-grown applications such as Prism, MaNcover, Shishu, etc.
+
+
+
+We identify our primary assets, which is the sensitive information and essential business processes and ensure their availability whenever we need them. We achieve this by applying information security protective measures to our supporting assets, which are typically applications and platforms. We adhere to the Healthineers Data Privacy (HDP) process by following the operations manual to protect our applications.
+
+
+
+What is the difference between the culture needed for DevOps and Agile? How do DevOps engineers contribute towards shaping this culture?
+
+
+
+Most teams which exist currently across various projects are followers of Agile mindset. This mindset focuses on customer feedback and rapid releases with constant changes. In contrast, in DevOps, the fundamental focus is to bring development and operation teams together through continuous justintime testing and delivery. In DevOps, the belief that every checkin done is eligible to be at the customer site, which is readily and actively available for consumption.
+
+While agile provides the ability to rapidly adapt to the changing requirements and better collaboration between different teams, DevOps promotes a fully automated continuous integration and deployment pipeline to enable frequent releases.
+
+
+Looking at it in another way, DevOps focuses on operational and business readiness, while Agile focuses on functional and nonfunctional readiness. So, in my perspective, both the philosophies goes handinhand. One needs the other to be successful.
+
+
+A DevOps engineer helps in integrating DevOps practices over the foundational Agile process.
